@@ -39,4 +39,12 @@ class LoginActivity: AppCompatActivity() {
 
         }
     }
+
+    private fun getInputEmail(): String {
+        return findViewById<EditText>(R.id.emailEditText).text.toString()
+    }
+
+    private fun getInputPassword(): String {
+        return findViewById<EditText>(R.id.passwordEditText).text.toString()
+    }
 }
