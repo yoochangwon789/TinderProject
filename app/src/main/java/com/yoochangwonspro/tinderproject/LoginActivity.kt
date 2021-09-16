@@ -80,6 +80,11 @@ class LoginActivity: AppCompatActivity() {
             signUpButton.isEnabled = enable
         }
 
+        passwordEditText.addTextChangedListener {
+            val enable = emailEditText.text.isNotEmpty() && passwordEditText.text.isNotEmpty()
+            loginButton.isEnabled = enable
+            signUpButton.isEnabled = enable
+        }
     }
 
     private fun getInputEmail(): String {
