@@ -21,7 +21,22 @@ class LoginActivity: AppCompatActivity() {
 
         val emilEditText = findViewById<EditText>(R.id.emailEditText)
         val passwordEditText = findViewById<EditText>(R.id.passwordEditText)
+
+        initLoginButton()
+        initSignUpButton()
+    }
+
+    private fun initLoginButton() {
         val loginButton = findViewById<Button>(R.id.loginButton)
+        loginButton.setOnClickListener {
+
+        }
+    }
+
+    private fun initSignUpButton() {
         val signUpButton = findViewById<Button>(R.id.signUpButton)
+        signUpButton.setOnClickListener {
+
+        }
     }
 }
