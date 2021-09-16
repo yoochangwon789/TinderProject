@@ -2,10 +2,13 @@ package com.yoochangwonspro.tinderproject
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -26,6 +29,7 @@ class LoginActivity: AppCompatActivity() {
 
         initLoginButton()
         initSignUpButton()
+        initEmailAndPasswordEditText()
     }
 
     @SuppressLint("ShowToast")
@@ -62,6 +66,20 @@ class LoginActivity: AppCompatActivity() {
                     }
                 }
         }
+    }
+
+    private fun initEmailAndPasswordEditText() {
+        val emailEditText = findViewById<EditText>(R.id.emailEditText)
+        val passwordEditText = findViewById<EditText>(R.id.passwordEditText)
+        val loginButton = findViewById<Button>(R.id.loginButton)
+        val signUpButton = findViewById<Button>(R.id.signUpButton)
+
+        emailEditText.addTextChangedListener {
+            val enable = emailEditText.text.isNotEmpty() && passwordEditText.text.isNotEmpty()
+            loginButton.isEnabled = enable
+            signUpButton.isEnabled = enable
+        }
+
     }
 
     private fun getInputEmail(): String {
