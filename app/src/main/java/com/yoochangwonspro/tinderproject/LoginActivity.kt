@@ -44,7 +44,7 @@ class LoginActivity: AppCompatActivity() {
                     if (task.isSuccessful) {
                         finish()
                     } else {
-                        Toast.makeText(this, "로그인에 실패했습니다. 이메일 또는 비밀번호를 확인해 주세요.", Toast.LENGTH_SHORT)
+                        Toast.makeText(this, "로그인에 실패했습니다. 이메일 또는 비밀번호를 확인해 주세요.", Toast.LENGTH_LONG).show()
                     }
                 }
         }
@@ -60,9 +60,9 @@ class LoginActivity: AppCompatActivity() {
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        Toast.makeText(this, "회원가입에 성공했습니다. 로그인 버튼을 눌러 로그인 해주세요.", Toast.LENGTH_SHORT)
+                        Toast.makeText(this, "회원가입에 성공했습니다. 로그인 버튼을 눌러 로그인 해주세요.", Toast.LENGTH_LONG).show()
                     } else {
-                        Toast.makeText(this, "이미 가입한 이메일이거나, 회원가입에 실패했습니다.", Toast.LENGTH_SHORT)
+                        Toast.makeText(this, "이미 가입한 이메일이거나, 회원가입에 실패했습니다.", Toast.LENGTH_LONG).show()
                     }
                 }
         }
