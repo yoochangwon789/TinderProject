@@ -1,8 +1,10 @@
 package com.yoochangwonspro.tinderproject
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -26,16 +28,30 @@ class LoginActivity: AppCompatActivity() {
         initSignUpButton()
     }
 
+    @SuppressLint("ShowToast")
     private fun initLoginButton() {
         val loginButton = findViewById<Button>(R.id.loginButton)
         loginButton.setOnClickListener {
+            val email = getInputEmail()
+            val password = getInputPassword()
 
+            auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        finish()
+                    } else {
+                        Toast.makeText(this, "로그인에 실패했습니다. 이메일 또는 비밀번호를 확인해 주세요.", Toast.LENGTH_SHORT)
+                    }
+                }
         }
     }
 
     private fun initSignUpButton() {
         val signUpButton = findViewById<Button>(R.id.signUpButton)
         signUpButton.setOnClickListener {
+            val email = getInputEmail()
+            val password = getInputPassword()
+
 
         }
     }
