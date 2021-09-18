@@ -52,7 +52,7 @@ class LikeActivity : AppCompatActivity(), CardStackListener {
     private fun initCardStackView() {
         val stackView = findViewById<CardStackView>(R.id.cardStackView)
         stackView.layoutManager = CardStackLayoutManager(this, this)
-        stackView.adapter = adpater
+        stackView.adapter = adapter
     }
 
     private fun showNameInputPopup() {
