@@ -1,6 +1,7 @@
 package com.yoochangwonspro.tinderproject
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -25,6 +26,7 @@ class LoginActivity: AppCompatActivity() {
 
         // FirebaseAuth.getInstance() 와 같고 ktx 형식으로 가져오는 방법
         auth = Firebase.auth
+        callbackManager = CallbackManager.Factory.create()
 
         initLoginButton()
         initSignUpButton()
@@ -92,5 +94,11 @@ class LoginActivity: AppCompatActivity() {
 
     private fun getInputPassword(): String {
         return findViewById<EditText>(R.id.passwordEditText).text.toString()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        callbackManager.onActivityResult(requestCode, resultCode, data)
     }
 }
