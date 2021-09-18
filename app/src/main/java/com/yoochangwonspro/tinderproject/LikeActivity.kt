@@ -56,7 +56,29 @@ class LikeActivity : AppCompatActivity(), CardStackListener {
     private fun getUnSelectedUsers() {
         userDB.addChildEventListener(object : ChildEventListener{
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                // 아무것도 선택되지 않은 user 의 조건
+                /*
+                * 현재 보고있는 userId 가 나와 같지 않고
+                * 나와 같지 않으면 나머진 모두 상대방
+                * 상대방의 like 의 나의 userId 를 가지고 있지 않는 경우
+                * 상대방의 disLike 의 나의 userId 를 자기고 있는 않는 경우
+                * 즉 이 user 는 내가 한번도 선택한적이 없는 user 이다 라는 조건 성립
+                * */
+                if (snapshot.child("userId").value != getCurrentUserID()
+                    && snapshot.child("likedBy").child("like").hasChild(getCurrentUserID()).not()
+                    && snapshot.child("likedBy").child("disLike").hasChild(getCurrentUserID()).not()) {
 
+                    val userId = snapshot.child("userId").value.toString()
+                    var name = "undecided"
+
+                    if (snapshot.child("name").value != null) {
+                        name = snapshot.child("name").value.toString()
+                    }
+
+                    cardItems.add(CardItem(userId, name))
+                    adapter.submitList(cardItems)
+                    adapter.notifyDataSetChanged()
+                }
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
