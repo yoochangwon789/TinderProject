@@ -49,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        finish()
+                        handleSuccessLogin()
                     } else {
                         Toast.makeText(this,
                             "로그인에 실패했습니다. 이메일 또는 비밀번호를 확인해 주세요.",
@@ -111,7 +111,7 @@ class LoginActivity : AppCompatActivity() {
                     auth.signInWithCredential(credential)
                         .addOnCompleteListener(this@LoginActivity) { task ->
                             if (task.isSuccessful) {
-                                finish()
+                                handleSuccessLogin()
                             } else {
                                 Toast.makeText(this@LoginActivity, "페이스북 로그인이 실패했습니다.", Toast.LENGTH_SHORT)
                                     .show()
@@ -142,5 +142,15 @@ class LoginActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         callbackManager.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun handleSuccessLogin() {
+        if (auth.currentUser == null) {
+            Toast.makeText(this, "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show()
+            return
+        } else {
+            val userId = auth.currentUser?.uid.orEmpty()
+
+        }
     }
 }
