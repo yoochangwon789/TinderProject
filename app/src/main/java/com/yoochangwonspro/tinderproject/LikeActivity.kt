@@ -2,6 +2,7 @@ package com.yoochangwonspro.tinderproject
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -13,9 +14,11 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager
+import com.yuyakaido.android.cardstackview.CardStackListener
 import com.yuyakaido.android.cardstackview.CardStackView
+import com.yuyakaido.android.cardstackview.Direction
 
-class LikeActivity : AppCompatActivity() {
+class LikeActivity : AppCompatActivity(), CardStackListener {
 
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
     lateinit var userDB: DatabaseReference
@@ -48,7 +51,7 @@ class LikeActivity : AppCompatActivity() {
 
     private fun initCardStackView() {
         val stackView = findViewById<CardStackView>(R.id.cardStackView)
-        stackView.layoutManager = CardStackLayoutManager(this)
+        stackView.layoutManager = CardStackLayoutManager(this, this)
         stackView.adapter = adpater
     }
 
@@ -87,4 +90,18 @@ class LikeActivity : AppCompatActivity() {
 
         return auth.currentUser?.uid.orEmpty()
     }
+
+    override fun onCardSwiped(direction: Direction?) {
+
+    }
+
+    override fun onCardDragging(direction: Direction?, ratio: Float) {}
+
+    override fun onCardRewound() {}
+
+    override fun onCardCanceled() {}
+
+    override fun onCardAppeared(view: View?, position: Int) {}
+
+    override fun onCardDisappeared(view: View?, position: Int) {}
 }
