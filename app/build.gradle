@@ -48,4 +48,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.facebook.android:facebook-login:11.1.0'
+    implementation 'com.google.firebase:firebase-database-ktx'
 }
