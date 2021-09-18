@@ -31,6 +31,7 @@ class LoginActivity: AppCompatActivity() {
         initLoginButton()
         initSignUpButton()
         initEmailAndPasswordEditText()
+        initFacebookLoginButton()
     }
 
     @SuppressLint("ShowToast")
@@ -86,6 +87,10 @@ class LoginActivity: AppCompatActivity() {
             loginButton.isEnabled = enable
             signUpButton.isEnabled = enable
         }
+    }
+
+    private fun initFacebookLoginButton() {
+
     }
 
     private fun getInputEmail(): String {
