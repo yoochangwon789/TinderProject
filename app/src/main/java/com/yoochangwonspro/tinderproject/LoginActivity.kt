@@ -158,5 +158,7 @@ class LoginActivity : AppCompatActivity() {
 
         user["userId"] = userId
         currentUserDB.updateChildren(user)
+
+        finish()
     }
 }

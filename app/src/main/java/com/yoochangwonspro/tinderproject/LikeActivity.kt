@@ -28,7 +28,7 @@ class LikeActivity : AppCompatActivity() {
         currentUserDB.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.child("name").value == null) {
-
+                    showNameInputPopup()
                     return
                 }
 
@@ -57,7 +57,13 @@ class LikeActivity : AppCompatActivity() {
     }
 
     private fun saveUserName(name: String) {
+        val userId = getCurrentUserID()
+        val currentUserDB = userDB.child(userId)
+        val user = mutableMapOf<String, Any>()
 
+        user["userId"] = userId
+        user["name"] = name
+        currentUserDB.updateChildren(user)
     }
 
     private fun getCurrentUserID(): String {
