@@ -3,6 +3,7 @@ package com.yoochangwonspro.tinderproject
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +13,7 @@ class CardItemAdapter: ListAdapter<CardItem, CardItemAdapter.ViewHolder>(diffUti
     inner class ViewHolder(private val view: View): RecyclerView.ViewHolder(view) {
 
         fun bind(cardItem: CardItem) {
-
+            view.findViewById<TextView>(R.id.nameTextView).text = cardItem.name
         }
     }
 
