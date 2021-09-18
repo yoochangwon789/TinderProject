@@ -2,7 +2,9 @@ package com.yoochangwonspro.tinderproject
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -35,6 +37,27 @@ class LikeActivity : AppCompatActivity() {
 
             override fun onCancelled(error: DatabaseError) {}
         })
+    }
+
+    private fun showNameInputPopup() {
+        val editText = EditText(this)
+
+        AlertDialog.Builder(this)
+            .setTitle("이름을 입력해주세요")
+            .setView(editText)
+            .setPositiveButton("저장") {_, _ ->
+                if (editText.text.isEmpty()) {
+                    showNameInputPopup()
+                } else {
+                    saveUserName(editText.text.toString())
+                }
+            }
+            .setCancelable(false)
+            .show()
+    }
+
+    private fun saveUserName(name: String) {
+
     }
 
     private fun getCurrentUserID(): String {
