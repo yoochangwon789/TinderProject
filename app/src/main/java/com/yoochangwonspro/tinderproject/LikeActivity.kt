@@ -82,7 +82,18 @@ class LikeActivity : AppCompatActivity(), CardStackListener {
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+                /*
+                * 데이터가 변경이 되었을 때 호출 된다.
+                * 즉, userId 값으로 변경이 된 user 를 cardItems 에서 찾는다
+                * 수정 된 name 값을 변경해주고
+                * adapter 에게 다시 변경된 데이터값을 submitList 한다
+                * */
+                cardItems.find { it.userId == snapshot.key }?.let {
+                    it.name = snapshot.child("name").value.toString()
+                }
 
+                adapter.submitList(cardItems)
+                adapter.notifyDataSetChanged()
             }
 
             override fun onChildRemoved(snapshot: DataSnapshot) {}
