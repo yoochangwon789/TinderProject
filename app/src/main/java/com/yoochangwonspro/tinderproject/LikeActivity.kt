@@ -7,10 +7,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager
@@ -40,6 +37,7 @@ class LikeActivity : AppCompatActivity(), CardStackListener {
                     return
                 }
 
+                getUnSelectedUsers()
                 // 유저 정보를 갱신해라
             }
 
@@ -53,6 +51,25 @@ class LikeActivity : AppCompatActivity(), CardStackListener {
         val stackView = findViewById<CardStackView>(R.id.cardStackView)
         stackView.layoutManager = CardStackLayoutManager(this, this)
         stackView.adapter = adapter
+    }
+
+    private fun getUnSelectedUsers() {
+        userDB.addChildEventListener(object : ChildEventListener{
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+
+            }
+
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+
+            }
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {}
+
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
+
+            override fun onCancelled(error: DatabaseError) {}
+
+        })
     }
 
     private fun showNameInputPopup() {
@@ -80,6 +97,8 @@ class LikeActivity : AppCompatActivity(), CardStackListener {
         user["userId"] = userId
         user["name"] = name
         currentUserDB.updateChildren(user)
+
+        getUnSelectedUsers()
     }
 
     private fun getCurrentUserID(): String {
