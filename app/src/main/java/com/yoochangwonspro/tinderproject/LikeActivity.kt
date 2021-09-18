@@ -12,11 +12,16 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.yuyakaido.android.cardstackview.CardStackLayoutManager
+import com.yuyakaido.android.cardstackview.CardStackView
 
 class LikeActivity : AppCompatActivity() {
 
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
     lateinit var userDB: DatabaseReference
+
+    private val adapter = CardItemAdapter()
+    private val cardItems = mutableListOf<CardItem>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +42,14 @@ class LikeActivity : AppCompatActivity() {
 
             override fun onCancelled(error: DatabaseError) {}
         })
+
+        initCardStackView()
+    }
+
+    private fun initCardStackView() {
+        val stackView = findViewById<CardStackView>(R.id.cardStackView)
+        stackView.layoutManager = CardStackLayoutManager(this)
+        stackView.adapter = adpater
     }
 
     private fun showNameInputPopup() {
