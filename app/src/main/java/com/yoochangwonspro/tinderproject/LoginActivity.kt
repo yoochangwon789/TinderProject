@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
+import com.facebook.CallbackManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -16,6 +17,7 @@ import com.google.firebase.ktx.Firebase
 class LoginActivity: AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var callbackManager: CallbackManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,9 +25,6 @@ class LoginActivity: AppCompatActivity() {
 
         // FirebaseAuth.getInstance() 와 같고 ktx 형식으로 가져오는 방법
         auth = Firebase.auth
-
-        val emilEditText = findViewById<EditText>(R.id.emailEditText)
-        val passwordEditText = findViewById<EditText>(R.id.passwordEditText)
 
         initLoginButton()
         initSignUpButton()
