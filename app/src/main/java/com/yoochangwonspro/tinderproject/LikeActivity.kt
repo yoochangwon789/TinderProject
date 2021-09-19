@@ -52,7 +52,7 @@ class LikeActivity : AppCompatActivity(), CardStackListener {
 
     private fun initCardStackView() {
         val stackView = findViewById<CardStackView>(R.id.cardStackView)
-        stackView.layoutManager = CardStackLayoutManager(this, this)
+        stackView.layoutManager = manager
         stackView.adapter = adapter
     }
 
@@ -147,7 +147,18 @@ class LikeActivity : AppCompatActivity(), CardStackListener {
     }
 
     private fun like() {
+        val card = cardItems[manager.topPosition - 1]
+        cardItems.removeFirst()
 
+        userDB.child(card.userId)
+            .child("likeBy")
+            .child("like")
+            .child(getCurrentUserID())
+            .setValue(true)
+
+        // todo : 매칭이 된 시점을 봐야한다.
+
+        Toast.makeText(this, "${card.name}님을 Like 하셨습니다.", Toast.LENGTH_SHORT).show()
     }
 
     private fun disLike() {
