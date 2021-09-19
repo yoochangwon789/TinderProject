@@ -2,6 +2,7 @@ package com.yoochangwonspro.tinderproject
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
@@ -48,6 +49,7 @@ class LikeActivity : AppCompatActivity(), CardStackListener {
         })
 
         initCardStackView()
+        Log.d("CardItem", "$cardItems")
     }
 
     private fun initCardStackView() {
@@ -149,6 +151,8 @@ class LikeActivity : AppCompatActivity(), CardStackListener {
     private fun like() {
         val card = cardItems[manager.topPosition - 1]
         cardItems.removeFirst()
+
+        Log.d("CardItem", "$cardItems")
 
         userDB.child(card.userId)
             .child("likeBy")
