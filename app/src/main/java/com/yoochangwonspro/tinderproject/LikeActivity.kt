@@ -22,6 +22,9 @@ class LikeActivity : AppCompatActivity(), CardStackListener {
 
     private val adapter = CardItemAdapter()
     private val cardItems = mutableListOf<CardItem>()
+    private val manager by lazy {
+        CardStackLayoutManager(this, this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -141,6 +144,14 @@ class LikeActivity : AppCompatActivity(), CardStackListener {
         }
 
         return auth.currentUser?.uid.orEmpty()
+    }
+
+    private fun like() {
+
+    }
+
+    private fun disLike() {
+
     }
 
     override fun onCardSwiped(direction: Direction?) {
