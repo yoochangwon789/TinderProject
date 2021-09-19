@@ -162,7 +162,16 @@ class LikeActivity : AppCompatActivity(), CardStackListener {
     }
 
     private fun disLike() {
+        val card = cardItems[manager.topPosition - 1]
+        cardItems.removeFirst()
 
+        userDB.child(card.userId)
+            .child("likeBy")
+            .child("disLike")
+            .child(getCurrentUserID())
+            .setValue(true)
+
+        Toast.makeText(this, "${card.name}님을 disLike 하셨습니다.", Toast.LENGTH_SHORT).show()
     }
 
     override fun onCardSwiped(direction: Direction?) {
