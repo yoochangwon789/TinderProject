@@ -144,7 +144,11 @@ class LikeActivity : AppCompatActivity(), CardStackListener {
     }
 
     override fun onCardSwiped(direction: Direction?) {
-
+        when (direction) {
+            Direction.Right -> like()
+            Direction.Left -> disLike()
+            else -> {}
+        }
     }
 
     override fun onCardDragging(direction: Direction?, ratio: Float) {}
