@@ -166,13 +166,25 @@ class LikeActivity : AppCompatActivity(), CardStackListener {
         Toast.makeText(this, "${card.name}님을 Like 하셨습니다.", Toast.LENGTH_SHORT).show()
     }
 
-    private fun saveMatchIfOtherUserLikedMe(userId: String) {
+    private fun saveMatchIfOtherUserLikedMe(otherUserId: String) {
         val otherUserDB =
-            userDB.child(getCurrentUserID()).child("likedBy").child("like").child(userId)
+            userDB.child(getCurrentUserID()).child("likedBy").child("like").child(otherUserId)
 
         otherUserDB.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.value == true) {
+                    userDB.child(getCurrentUserID())
+                        .child("likedBy")
+                        .child("match")
+                        .child(otherUserId)
+                        .setValue(true)
 
+                    userDB.child(otherUserId)
+                        .child("likedBy")
+                        .child("match")
+                        .child(getCurrentUserID())
+                        .setValue(true)
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {}
