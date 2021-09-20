@@ -56,7 +56,11 @@ class LikeActivity : AppCompatActivity(), CardStackListener {
     }
 
     private fun initLogoutButton() {
-
+        val signOutButton = findViewById<Button>(R.id.logoutButton)
+        signOutButton.setOnClickListener {
+            auth.signOut()
+            finish()
+        }
     }
 
     private fun initMatchedListButton() {
