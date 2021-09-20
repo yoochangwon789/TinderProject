@@ -59,7 +59,7 @@ class LikeActivity : AppCompatActivity(), CardStackListener {
     }
 
     private fun getUnSelectedUsers() {
-        userDB.addChildEventListener(object : ChildEventListener{
+        userDB.addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 // 아무것도 선택되지 않은 user 의 조건
                 /*
@@ -71,7 +71,8 @@ class LikeActivity : AppCompatActivity(), CardStackListener {
                 * */
                 if (snapshot.child("userId").value != getCurrentUserID()
                     && snapshot.child("likedBy").child("like").hasChild(getCurrentUserID()).not()
-                    && snapshot.child("likedBy").child("disLike").hasChild(getCurrentUserID()).not()) {
+                    && snapshot.child("likedBy").child("disLike").hasChild(getCurrentUserID()).not()
+                ) {
 
                     val userId = snapshot.child("userId").value.toString()
                     var name = "undecided"
@@ -116,7 +117,7 @@ class LikeActivity : AppCompatActivity(), CardStackListener {
         AlertDialog.Builder(this)
             .setTitle("이름을 입력해주세요")
             .setView(editText)
-            .setPositiveButton("저장") {_, _ ->
+            .setPositiveButton("저장") { _, _ ->
                 if (editText.text.isEmpty()) {
                     showNameInputPopup()
                 } else {
@@ -166,7 +167,17 @@ class LikeActivity : AppCompatActivity(), CardStackListener {
     }
 
     private fun saveMatchIfOtherUserLikedMe(userId: String) {
+        val otherUserDB =
+            userDB.child(getCurrentUserID()).child("likedBy").child("like").child(userId)
 
+        otherUserDB.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {}
+
+        })
     }
 
     private fun disLike() {
@@ -186,7 +197,8 @@ class LikeActivity : AppCompatActivity(), CardStackListener {
         when (direction) {
             Direction.Right -> like()
             Direction.Left -> disLike()
-            else -> {}
+            else -> {
+            }
         }
     }
 
