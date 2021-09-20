@@ -42,7 +42,9 @@ class MatchedUserActivity : AppCompatActivity() {
 
         matchedDB.addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                if (snapshot.key?.isNotEmpty() == true) {
 
+                }
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {}
