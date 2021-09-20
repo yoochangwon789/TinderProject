@@ -66,7 +66,10 @@ class LikeActivity : AppCompatActivity(), CardStackListener {
     }
 
     private fun initMatchedListButton() {
-
+        val matchedListButton = findViewById<Button>(R.id.matchListButton)
+        matchedListButton.setOnClickListener {
+            startActivity(Intent(this, MatchedUserActivity::class.java))
+        }
     }
 
     private fun initCardStackView() {
