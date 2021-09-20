@@ -3,6 +3,8 @@ package com.yoochangwonspro.tinderproject
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
@@ -12,6 +14,8 @@ class MatchedUserActivity : AppCompatActivity() {
 
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
     lateinit var userDB: DatabaseReference
+    private val adapter = MatchedUserAdapter()
+    private val cardItems = mutableListOf<CardItem>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +27,10 @@ class MatchedUserActivity : AppCompatActivity() {
     }
 
     private fun initMatchedUserRecyclerView() {
+        val recyclerView = findViewById<RecyclerView>(R.id.matchedUserRecyclerView)
 
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = adapter
     }
 
 
