@@ -160,9 +160,13 @@ class LikeActivity : AppCompatActivity(), CardStackListener {
             .child(getCurrentUserID())
             .setValue(true)
 
-        // todo : 매칭이 된 시점을 봐야한다.
+        saveMatchIfOtherUserLikedMe(card.userId)
 
         Toast.makeText(this, "${card.name}님을 Like 하셨습니다.", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun saveMatchIfOtherUserLikedMe(userId: String) {
+
     }
 
     private fun disLike() {
