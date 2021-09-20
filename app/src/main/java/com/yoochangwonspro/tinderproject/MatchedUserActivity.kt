@@ -6,10 +6,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.ChildEventListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
@@ -43,7 +40,7 @@ class MatchedUserActivity : AppCompatActivity() {
         matchedDB.addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 if (snapshot.key?.isNotEmpty() == true) {
-
+                    getUserByKey(snapshot.key.orEmpty())
                 }
             }
 
@@ -52,6 +49,17 @@ class MatchedUserActivity : AppCompatActivity() {
             override fun onChildRemoved(snapshot: DataSnapshot) {}
 
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
+
+            override fun onCancelled(error: DatabaseError) {}
+
+        })
+    }
+
+    private fun getUserByKey(userId: String) {
+        userDB.child(userId).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+            }
 
             override fun onCancelled(error: DatabaseError) {}
 
