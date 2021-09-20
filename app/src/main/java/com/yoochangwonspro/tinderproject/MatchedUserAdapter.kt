@@ -13,7 +13,7 @@ class MatchedUserAdapter: ListAdapter<CardItem, MatchedUserAdapter.ViewHolder>(d
     inner class ViewHolder(private val view: View): RecyclerView.ViewHolder(view) {
 
         fun bind(cardItem: CardItem) {
-            view.findViewById<TextView>(R.id.nameTextView).text = cardItem.name
+            view.findViewById<TextView>(R.id.userNameTextView).text = cardItem.name
         }
     }
 
