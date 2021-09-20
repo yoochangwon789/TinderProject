@@ -18,7 +18,14 @@ class MatchedUserActivity : AppCompatActivity() {
         setContentView(R.layout.activity_matched_user)
 
         userDB = Firebase.database.reference.child("Users")
+
+        initMatchedUserRecyclerView()
     }
+
+    private fun initMatchedUserRecyclerView() {
+
+    }
+
 
     private fun getCurrentUserID(): String {
         if (auth.currentUser == null) {
