@@ -176,7 +176,7 @@ class LikeActivity : AppCompatActivity(), CardStackListener {
         Log.d("CardItem", "$cardItems")
 
         userDB.child(card.userId)
-            .child("likeBy")
+            .child("likedBy")
             .child("like")
             .child(getCurrentUserID())
             .setValue(true)
@@ -217,7 +217,7 @@ class LikeActivity : AppCompatActivity(), CardStackListener {
         cardItems.removeFirst()
 
         userDB.child(card.userId)
-            .child("likeBy")
+            .child("likedBy")
             .child("disLike")
             .child(getCurrentUserID())
             .setValue(true)
