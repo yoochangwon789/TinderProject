@@ -1,5 +1,6 @@
 package com.yoochangwonspro.tinderproject
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -59,6 +60,7 @@ class LikeActivity : AppCompatActivity(), CardStackListener {
         val signOutButton = findViewById<Button>(R.id.logoutButton)
         signOutButton.setOnClickListener {
             auth.signOut()
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
     }
