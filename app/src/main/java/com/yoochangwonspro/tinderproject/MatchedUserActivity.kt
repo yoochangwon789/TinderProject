@@ -24,6 +24,7 @@ class MatchedUserActivity : AppCompatActivity() {
         userDB = Firebase.database.reference.child("Users")
 
         initMatchedUserRecyclerView()
+        getMatchUsers()
     }
 
     private fun initMatchedUserRecyclerView() {
@@ -33,6 +34,9 @@ class MatchedUserActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
     }
 
+    private fun getMatchUsers() {
+        val matchedDB = userDB.child(getCurrentUserID()).child("likedBy").child("match")
+    }
 
     private fun getCurrentUserID(): String {
         if (auth.currentUser == null) {
