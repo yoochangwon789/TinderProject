@@ -20,6 +20,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.yoochangwonspro.tinderproject.DBKey.Companion.USERS
+import com.yoochangwonspro.tinderproject.DBKey.Companion.USER_ID
 
 class LoginActivity : AppCompatActivity() {
 
@@ -153,10 +155,10 @@ class LoginActivity : AppCompatActivity() {
             return
         }
         val userId = auth.currentUser?.uid.orEmpty()
-        val currentUserDB = Firebase.database.reference.child("Users").child(userId)
+        val currentUserDB = Firebase.database.reference.child(USERS).child(userId)
         val user = mutableMapOf<String, Any>()
 
-        user["userId"] = userId
+        user[USER_ID] = userId
         currentUserDB.updateChildren(user)
 
         finish()
