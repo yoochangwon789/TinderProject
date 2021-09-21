@@ -142,7 +142,7 @@ class LikeActivity : AppCompatActivity(), CardStackListener {
         val editText = EditText(this)
 
         AlertDialog.Builder(this)
-            .setTitle("이름을 입력해주세요")
+            .setTitle(getString(R.string.write_name))
             .setView(editText)
             .setPositiveButton("저장") { _, _ ->
                 if (editText.text.isEmpty()) {
