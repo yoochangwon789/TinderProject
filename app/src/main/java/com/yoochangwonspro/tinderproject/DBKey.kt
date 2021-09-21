@@ -8,5 +8,6 @@ class DBKey {
         const val DIS_LIKE = "disLike"
         const val USER_ID = "userId"
         const val NAME = "name"
+        const val MATCH = "match"
     }
 }
